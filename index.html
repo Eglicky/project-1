@@ -1,80 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Site Analyzer</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/6.14.0/simple-icons.min.css">
+  <title>Site Metadata Analyzer</title>
   <style>
-    body, html {
+    /* Basic styling for the layout */
+    body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
+      margin: 20px;
     }
-    #container {
-      padding: 20px;
+    h2 {
+      font-size: 1.5em;
     }
-    #top-bar {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    #top-bar input[type="text"] {
-      flex-grow: 1;
-      padding: 8px;
-      font-size: 1em;
-      margin-right: 10px;
-    }
-    #top-bar button {
-      padding: 8px 16px;
-      font-size: 1em;
-      cursor: pointer;
-    }
-    #metadata, #pages-container {
+    .metadata, .pages {
       margin-top: 20px;
     }
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .card {
-      flex: 1 1 calc(33% - 20px);
+    .page-card {
       border: 1px solid #ddd;
-      padding: 16px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
-    }
-    .card img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-    }
-    .card h3 {
+      padding: 10px;
       margin: 10px 0;
+      border-radius: 5px;
+      max-width: 600px;
     }
-    .metadata-item, .card p {
-      margin: 4px 0;
+    .page-card h3 {
+      margin-top: 0;
+    }
+    .page-card a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .page-card a:hover {
+      text-decoration: underline;
+    }
+    img {
+      max-width: 100px;
+      max-height: 100px;
     }
   </style>
 </head>
 <body>
-  <div id="container">
-    <div id="top-bar">
-      <input type="text" id="site-url" value="https://haxtheweb.org/site.json" placeholder="Enter site JSON URL" />
-      <button onclick="analyzeSite()">Analyze</button>
-    </div>
 
-    <div id="metadata">
-      <!-- Main site metadata will be populated here -->
-    </div>
-
-    <div class="card-container" id="pages-container">
-      <!-- Cards for individual pages will be populated here -->
-    </div>
+  <div>
+    <input type="text" id="site-url" placeholder="Enter JSON URL (e.g., https://haxtheweb.org/site.json)" style="width: 80%;" />
+    <button onclick="analyzeSite()">Analyze</button>
   </div>
 
-  <script type="module" src="./project-1.js"></script>
+  <div id="site-metadata" class="metadata"></div>
+  <div id="site-pages" class="pages"></div>
+
+  <script src="project-1.js"></script>
 </body>
 </html>

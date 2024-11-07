@@ -1,52 +1,49 @@
 async function analyzeSite() {
   const siteUrl = document.getElementById("site-url").value;
+
   try {
     const response = await fetch(siteUrl);
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
     const data = await response.json();
+
     displayMetadata(data);
-    displayPages(data.pages || []); // Handles if 'pages' is missing
+    displayPages(data.pages || []);
   } catch (error) {
     console.error("Error fetching site data:", error);
     alert("Failed to fetch site data. Please check the URL or try again later.");
   }
 }
 
-/**
- * Displays main site metadata.
- * @param {Object} data - The site JSON data.
- */
 function displayMetadata(data) {
-  const metadataContainer = document.getElementById("metadata");
+  const metadataContainer = document.getElementById("site-metadata");
+  
   metadataContainer.innerHTML = `
     <h2>Site Metadata</h2>
-    <div class="metadata-item"><strong>Name:</strong> ${data.name || "N/A"}</div>
-    <div class="metadata-item"><strong>Description:</strong> ${data.description || "N/A"}</div>
-    <div class="metadata-item"><strong>Theme:</strong> ${data.metadata?.theme || "N/A"}</div>
-    <div class="metadata-item"><strong>Created:</strong> ${data.metadata?.created || "N/A"}</div>
-    <div class="metadata-item"><strong>Last Updated:</strong> ${data.metadata?.updated || "N/A"}</div>
-    <div class="metadata-item"><strong>Hex Code:</strong> <span style="color:${data.metadata?.hexCode || '#000'}">${data.metadata?.hexCode || "N/A"}</span></div>
-    <img src="${data.metadata?.logo || ''}" alt="Site Logo" style="max-width: 150px; margin-top: 10px;">
+    <p><strong>Name:</strong> ${data.name || "N/A"}</p>
+    <p><strong>Description:</strong> ${data.description || "N/A"}</p>
+    <p><strong>Theme:</strong> ${data.theme ? JSON.stringify(data.theme) : "N/A"}</p>
+    <p><strong>Created:</strong> ${data.created || "N/A"}</p>
+    <p><strong>Last Updated:</strong> ${data.updated || "N/A"}</p>
+    <p><strong>Hex Code:</strong> ${data.hexCode || "N/A"}</p>
+    <img src="${data.logo || ""}" alt="Site Logo">
   `;
 }
 
-/**
- * Displays cards for each page in the site.
- * @param {Array} pages - Array of page objects.
- */
 function displayPages(pages) {
-  const pagesContainer = document.getElementById("pages-container");
-  pagesContainer.innerHTML = ""; // Clear existing cards
+  const pagesContainer = document.getElementById("site-pages");
+  pagesContainer.innerHTML = ""; // Clear existing content
+  
   pages.forEach(page => {
     const card = document.createElement("div");
-    card.className = "card";
+    card.classList.add("page-card");
+
     card.innerHTML = `
-      <img src="${page.thumbnail || 'https://via.placeholder.com/150'}" alt="Page Thumbnail">
-      <h3>${page.title || "Page Title"}</h3>
-      <p><strong>Last Updated:</strong> ${page.metadata?.updated || "N/A"}</p>
-      <p><strong>Description:</strong> ${page.description || "No description available."}</p>
-      <p><a href="${page.location}" target="_blank">Open Content</a></p>
-      <p><a href="${page.source}" target="_blank">Open Source</a></p>
+      <h3>${page.title || "Untitled"}</h3>
+      <p><strong>Description:</strong> ${page.description || "N/A"}</p>
+      <a href="${page.url || "#"}" target="_blank">Visit Page</a>
     `;
+
     pagesContainer.appendChild(card);
   });
 }
