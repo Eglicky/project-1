@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Site Metadata Analyzer</title>
   <style>
-    /* Basic styling for the layout */
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
@@ -16,12 +15,16 @@
     .metadata, .pages {
       margin-top: 20px;
     }
+    .page-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
     .page-card {
       border: 1px solid #ddd;
       padding: 10px;
-      margin: 10px 0;
       border-radius: 5px;
-      max-width: 600px;
+      background-color: #f9f9f9;
     }
     .page-card h3 {
       margin-top: 0;
@@ -42,7 +45,7 @@
 <body>
 
   <div>
-    <input type="text" id="site-url" placeholder="Enter JSON URL (e.g., https://haxtheweb.org/site.json)" style="width: 80%;" />
+    <input type="text" id="site-url" value="https://haxtheweb.org/site.json" style="width: 80%;" />
     <button onclick="analyzeSite()">Analyze</button>
   </div>
 
