@@ -7,12 +7,32 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
       margin: 20px;
     }
-    h2 {
-      font-size: 1.5em;
+    h1 {
+      font-size: 2em;
+      color: #d32f2f; /* Red */
     }
-    .metadata, .pages {
+    input {
+      padding: 10px;
+      width: 80%;
+      border: 2px solid #1976d2; /* Blue */
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #1976d2; /* Blue */
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #d32f2f; /* Red */
+    }
+    .pages {
       margin-top: 20px;
     }
     .page-grid {
@@ -21,35 +41,40 @@
       gap: 20px;
     }
     .page-card {
-      border: 1px solid #ddd;
+      border: 2px solid #1976d2; /* Blue */
       padding: 10px;
       border-radius: 5px;
-      background-color: #f9f9f9;
+      background-color: #fff;
+      color: #333;
     }
     .page-card h3 {
       margin-top: 0;
+      color: #d32f2f; /* Red */
     }
     .page-card a {
-      color: #007bff;
+      color: #1976d2; /* Blue */
       text-decoration: none;
     }
     .page-card a:hover {
       text-decoration: underline;
+      color: #d32f2f; /* Red */
     }
     img {
       max-width: 100px;
       max-height: 100px;
+      border: 2px solid #1976d2; /* Blue */
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
 
   <div>
-    <input type="text" id="site-url" value="https://haxtheweb.org/site.json" style="width: 80%;" />
-    <button onclick="analyzeSite()">Analyze</button>
+    <input type="text" id="site-url" value="https://haxtheweb.org" placeholder="Enter site URL and press Enter" />
+    <button id="analyze-button" onclick="analyzeSite()">Analyze</button>
   </div>
 
-  <div id="site-metadata" class="metadata"></div>
+  <div id="main-title"></div>
   <div id="site-pages" class="pages"></div>
 
   <script src="project-1.js"></script>
